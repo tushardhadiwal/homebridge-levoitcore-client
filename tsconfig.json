@@ -1,0 +1,15 @@
+{
+    "compilerOptions": {
+        "module": "commonjs",
+        "moduleResolution": "node",
+        "sourceMap": false,
+        "target": "ES2018",
+        "resolveJsonModule": true,
+        "outDir": "./dist",
+        "rootDir": "./src",
+        "skipLibCheck": true
+    },
+    "include": [
+        "src"
+    ]
+}
