@@ -56,7 +56,7 @@ export class FanController {
         return this.details.enabled;
     }
 
-    getDetails(): Promise<FanDetails> {
+    async getDetails(): Promise<FanDetails> {
         const body = {
             ...createBaseBody(),
             ...createAuthBody(this.client),
@@ -77,12 +77,12 @@ export class FanController {
             headers: {'Content-Type': 'application/json; charset=UTF-8', 'User-Agent': 'VeSync/VeSync 3.0.51(F5321;Android 8.0.0)'},
             json: body
         });
-        const response= req.json();
+        const response: any= await req.json();
         const innerresult = response.result.result;
         return innerresult;
     }
 
-    setFanSpeed(speed: FanSpeed):boolean {
+    async setFanSpeed(speed: FanSpeed):Promise<boolean> {
 
         if (this.getFanMode() !== "manual")
         {
@@ -92,7 +92,7 @@ export class FanController {
         {
             return true;
         }
-        const head= {'Content-Type': 'application/json; charset=UTF-8', 'User-Agent': 'VeSync/VeSync 3.0.51(F5321;Android 8.0.0)'},
+        const head= {'Content-Type': 'application/json; charset=UTF-8', 'User-Agent': 'VeSync/VeSync 3.0.51(F5321;Android 8.0.0)'}
         if (speed+1 > 4){
             speed=1
         }
@@ -117,7 +117,7 @@ export class FanController {
             }
         }
 
-        const res= this.client.post('/cloud/v2/deviceManaged/bypassV2',{
+        const res:any= await this.client.post('/cloud/v2/deviceManaged/bypassV2',{
             headers: head,
             json: body
         }).json();
@@ -143,9 +143,9 @@ export class FanController {
         return this.details.air_quality_value;
     }
 
-    setFanMode(targetMode: FanMode) : boolean {
+    async setFanMode(targetMode: FanMode) : Promise<boolean> {
 
-        const head= {'Content-Type': 'application/json; charset=UTF-8', 'User-Agent': 'VeSync/VeSync 3.0.51(F5321;Android 8.0.0)'},
+        const head= {'Content-Type': 'application/json; charset=UTF-8', 'User-Agent': 'VeSync/VeSync 3.0.51(F5321;Android 8.0.0)'}
         const body = {
             ...createBaseBody(),
             ...createAuthBody(this.client),
@@ -164,7 +164,7 @@ export class FanController {
             }
         }
 
-        const res= this.client.post('/cloud/v2/deviceManaged/bypassV2',{
+        const res: any= await this.client.post('/cloud/v2/deviceManaged/bypassV2',{
             headers: head,
             json: body
         }).json();
