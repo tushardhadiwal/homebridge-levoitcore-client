@@ -46,7 +46,7 @@ export class FanController {
             }
         }
 
-        this.client.post('/cloud/v2/deviceManaged/bypassV2',{
+        this.client.post('cloud/v2/deviceManaged/bypassV2',{
             headers: {'Content-Type': 'application/json; charset=UTF-8', 'User-Agent': 'VeSync/VeSync 3.0.51(F5321;Android 8.0.0)'},
             json: body
         }).json();
@@ -73,7 +73,7 @@ export class FanController {
             }
         }
 
-        const req = this.client.post('/cloud/v2/deviceManaged/bypassV2', {
+        const req = this.client.post('cloud/v2/deviceManaged/bypassV2', {
             headers: {'Content-Type': 'application/json; charset=UTF-8', 'User-Agent': 'VeSync/VeSync 3.0.51(F5321;Android 8.0.0)'},
             json: body
         });
@@ -117,7 +117,7 @@ export class FanController {
             }
         }
 
-        const res:any= await this.client.post('/cloud/v2/deviceManaged/bypassV2',{
+        const res:any= await this.client.post('cloud/v2/deviceManaged/bypassV2',{
             headers: head,
             json: body
         }).json();
@@ -164,7 +164,7 @@ export class FanController {
             }
         }
 
-        const res: any= await this.client.post('/cloud/v2/deviceManaged/bypassV2',{
+        const res: any= await this.client.post('cloud/v2/deviceManaged/bypassV2',{
             headers: head,
             json: body
         }).json();
