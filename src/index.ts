@@ -43,8 +43,7 @@ class LevoitAirPurifier {
             })
             .onSet((value: CharacteristicValue) => {
                 const power = value === hap.Characteristic.Active.ACTIVE;
-                fanController.setPower(power);
-                return value;
+                return fanController.setPower(power);
             });
 
         this.airPurifierService.getCharacteristic(hap.Characteristic.CurrentAirPurifierState)
