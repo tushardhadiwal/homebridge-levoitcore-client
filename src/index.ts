@@ -35,6 +35,7 @@ class LevoitAirPurifier {
         private readonly api: API
     ) {
         this.fanController = new FanController(fan, client);
+        this.log.info("Fan Details are :", this.fanController.returnCurrentdetails())
         this.airPurifierService = this.getOrAddService(this.api.hap.Service.AirPurifier);
 
         // create handlers for required characteristics
@@ -80,6 +81,7 @@ class LevoitAirPurifier {
         this.log.info('Triggered GET Active');
 
         const isOn = this.fanController.isOn();
+        this.log.info('GET Active isOn Val is:',isOn);
         return isOn ? this.api.hap.Characteristic.Active.ACTIVE : this.api.hap.Characteristic.Active.INACTIVE;
 
     }
@@ -89,8 +91,8 @@ class LevoitAirPurifier {
      */
     async handleActiveSet(value) {
         this.log.info('Triggered SET Active:', value);
-        const power = value === this.api.hap.Characteristic.Active.ACTIVE;
-        this.fanController.setPower(power);
+        const power : boolean = value === this.api.hap.Characteristic.Active.ACTIVE;
+        this.log.info('Power Value is:', power);
 
         return await this.fanController.setPower(power) === true ? value : undefined;
     }
@@ -117,10 +119,10 @@ class LevoitAirPurifier {
      */
     handleTargetAirPurifierStateGet() {
         this.log.info('Triggered GET TargetAirPurifierState');
+        this.log.info('Current Fan Mode is :',this.fanController.getFanMode());
         if(this.fanController.getFanMode()=="auto")
         {
             return this.api.hap.Characteristic.TargetAirPurifierState.AUTO;
-
         }
         else if(this.fanController.getFanMode()=="manual"){
             return this.api.hap.Characteristic.TargetAirPurifierState.MANUAL;
@@ -136,12 +138,16 @@ class LevoitAirPurifier {
 
         if(value===this.api.hap.Characteristic.TargetAirPurifierState.AUTO)
         {
-            return await this.fanController.setFanMode("auto") === true ? value : undefined;
+            const rval = await this.fanController.setFanMode("auto") === true ? value : undefined;
+            this.log.info('Rval TargetAirPurifierState:', rval);
+            return rval;
 
         }
         else if(value===this.api.hap.Characteristic.TargetAirPurifierState.MANUAL){
 
-            return await this.fanController.setFanMode("manual") === true ? value : undefined;
+            const rval = await this.fanController.setFanMode("manual") === true ? value : undefined;
+            this.log.info('Rval TargetAirPurifierState:', rval);
+            return rval;
 
         }
     }
@@ -154,8 +160,10 @@ class LevoitAirPurifier {
         const RATIO = 25;
         // NOTE: `.toFixed` returns `string`
         const toPercentage = (speed: number) => Math.round((speed * RATIO) * 100) / 100;
+        const rval=toPercentage(this.fanController.getFanSpeed());
+        this.log.info('Rval for GET RotationSpeed',rval);
 
-        return toPercentage(this.fanController.getFanSpeed());
+        return rval;
     }
 
     /**

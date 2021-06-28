@@ -60,6 +60,10 @@ export class FanController {
         return this.details.enabled;
     }
 
+    returnCurrentdetails():FanDetails{
+        return this.details;
+    }
+
     async getDetails(): Promise<FanDetails> {
         const body = {
             ...createBaseBody(),
