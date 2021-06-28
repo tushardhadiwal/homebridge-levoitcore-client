@@ -25,7 +25,7 @@ export class FanController {
         this.details = await this.getDetails();
     }
 
-    setPower(toggle: boolean) {
+    async setPower(toggle: boolean):Promise<boolean> {
 
         const body = {
             ...createBaseBody(),
@@ -46,10 +46,14 @@ export class FanController {
             }
         }
 
-        this.client.post('cloud/v2/deviceManaged/bypassV2',{
+        const req = this.client.post('cloud/v2/deviceManaged/bypassV2',{
             headers: {'Content-Type': 'application/json; charset=UTF-8', 'User-Agent': 'VeSync/VeSync 3.0.51(F5321;Android 8.0.0)'},
             json: body
-        }).json();
+        });
+
+        const response: any= await req.json();
+        const code = response.result.code;
+        return code===0 ? true : false;
     }
 
     isOn(): boolean {
