@@ -101,7 +101,7 @@ export class FanController {
             return true;
         }
         const head= {'Content-Type': 'application/json; charset=UTF-8', 'User-Agent': 'VeSync/VeSync 3.0.51(F5321;Android 8.0.0)'}
-        if (speed+1 > 4){
+        if (speed+1 >= 5){
             speed=1
         }
 

@@ -93,8 +93,10 @@ class LevoitAirPurifier {
         this.log.info('Triggered SET Active:', value);
         const power : boolean = value === this.api.hap.Characteristic.Active.ACTIVE;
         this.log.info('Power Value is:', power);
+        const rval= await this.fanController.setPower(power);
+        this.log.info('Rval for SET ACTIVE is:', rval);
 
-        return await this.fanController.setPower(power) === true ? value : undefined;
+        return rval == true ? value : undefined;
     }
 
     /**
@@ -184,7 +186,7 @@ class LevoitAirPurifier {
         {
             return await this.fanController.setFanSpeed(3) === true ? value : undefined;
         }
-        else if (value <=100)
+        else if (value > 75)
         {
             return await this.fanController.setFanSpeed(4) === true ? value : undefined;
         }
