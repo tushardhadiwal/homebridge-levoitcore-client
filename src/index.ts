@@ -89,14 +89,21 @@ class LevoitAirPurifier {
     /**
      * Handle requests to set the "Active" characteristic
      */
-    async handleActiveSet(value) {
+    handleActiveSet(value) {
         this.log.info('Triggered SET Active:', value);
         const power : boolean = value === this.api.hap.Characteristic.Active.ACTIVE;
         this.log.info('Power Value is:', power);
-        const rval= await this.fanController.setPower(power);
-        this.log.info('Rval for SET ACTIVE is:', rval);
 
+        this.fanController.setPower(power).then(rval => {
+
+        this.log.info('Rval for SET ACTIVE is:', rval);
         return rval == true ? value : undefined;
+        this.log.info('should not be printed');
+        });
+        this.log.info('should not be printed2');
+
+        // this.log.info('Rval for SET ACTIVE is:', rval);
+        // return rval == true ? value : undefined;
     }
 
     /**
