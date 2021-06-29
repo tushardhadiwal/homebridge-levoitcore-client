@@ -100,6 +100,7 @@ class LevoitAirPurifier {
 
         this.log.info('Rval for SET ACTIVE is:', rval);
         if (rval == true){
+            this.log.info('rval in if loop', rval);
             retu2=value;
         }
         else {
@@ -107,7 +108,7 @@ class LevoitAirPurifier {
         }
         });
         this.log.info('Retu2 is:',retu2);
-        return retu2;
+        return value;
 
         // this.log.info('Rval for SET ACTIVE is:', rval);
         // return rval == true ? value : undefined;
@@ -119,7 +120,11 @@ class LevoitAirPurifier {
     handleCurrentAirPurifierStateGet() {
         this.log.info('Triggered GET CurrentAirPurifierState');
 
-        if(this.fanController.isOn()){
+        const rval=this.fanController.isOn();
+        this.log.info("Current Purifier state RVAL is:",rval);
+
+        if(rval == true){
+
             return this.api.hap.Characteristic.CurrentAirPurifierState.PURIFYING_AIR;
         }
         else

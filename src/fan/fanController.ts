@@ -53,7 +53,15 @@ export class FanController {
 
         const response: any= await req.json();
         const code = response.result.code;
-        return code===0 ? true : false;
+        if (code===0)
+        {
+            this.details.enabled = toggle;
+            return true;
+        }
+        else{
+            return false;
+        }
+
     }
 
     isOn(): boolean {
