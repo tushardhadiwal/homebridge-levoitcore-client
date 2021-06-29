@@ -65,6 +65,7 @@ export class FanController {
     }
 
     isOn(): boolean {
+        this.initialize();
         return this.details.enabled;
     }
 
@@ -148,6 +149,7 @@ export class FanController {
     }
 
     getFanSpeed(): FanSpeed {
+        this.initialize();
         return this.details.level;
     }
 

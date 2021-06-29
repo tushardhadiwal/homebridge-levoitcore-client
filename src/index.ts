@@ -94,24 +94,19 @@ class LevoitAirPurifier {
         const power : boolean = value === this.api.hap.Characteristic.Active.ACTIVE;
         this.log.info('Power Value is:', power);
 
-        let retu2;
+        let return_val;
 
         this.fanController.setPower(power).then(rval => {
 
-        this.log.info('Rval for SET ACTIVE is:', rval);
         if (rval == true){
-            this.log.info('rval in if loop', rval);
-            retu2=value;
+            return_val=value;
+            this.airPurifierService.updateCharacteristic(this.api.hap.Characteristic.CurrentAirPurifierState, value === 1 ? 2 : 0)
         }
         else {
-            retu2=undefined;
+            return_val=undefined;
         }
         });
-        this.log.info('Retu2 is:',retu2);
-        return value;
-
-        // this.log.info('Rval for SET ACTIVE is:', rval);
-        // return rval == true ? value : undefined;
+        return return_val;
     }
 
     /**

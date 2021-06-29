@@ -1,6 +1,6 @@
 {
     "name": "homebridge-levoitcore-client",
-    "version": "0.0.15",
+    "version": "0.0.17",
     "description": "A Homebridge plugin to control Levoit Air Purifiers with via the Vesync Platform.",
     "keywords": [
         "homebridge-plugin",
