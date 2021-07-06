@@ -4,7 +4,7 @@
 
 A [Homebridge](https://github.com/homebridge/homebridge) plugin to control Levoit Air Purifiers with via the Vesync Platform.
 
-**NOTE: This plugin is developed to support my Levoit Core400S/200S Air Purifier. It may work for you as well.**
+**NOTE: This plugin is developed to support my Levoit Core400S Air Purifier(tested). It may work for you as well. Some Basic Features may work for Core200S(untested).**
 
 Inspired from https://github.com/Kwintenvdb/homebridge-vesync-client which unfortunately does not support latest Levoit purifiers, so I had to make one for myself.
 
